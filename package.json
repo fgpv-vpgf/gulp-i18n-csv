@@ -1,43 +1,43 @@
 {
-  "name": "gulp-i18n-csv",
-  "version": "1.0.1",
-  "description": "Create internationalized files from a CSV translations file",
-  "license": "MIT",
-  "repository": "fgpv-vpgf/gulp-i18n-csv",
-  "author": {
-    "name": "Cynthia (Qingwei) Li",
-    "email": "Qingwei.Li@ec.gc.ca"
-  },
-  "engines": {
-    "node": ">=0.10.0"
-  },
-  "scripts": {
-    "test": "mocha"
-  },
-  "files": [
-    "index.js",
-    "sample"
-  ],
-  "keywords": [
-    "gulpplugin",
-    "grunt",
-    "i18n",
-    "csv",
-    "translation"
-  ],
-  "dependencies": {
-    "csv": "^0.4.6",
-    "csv-parse": "^1.0.0",
-    "gulp-util": "^3.0.4",
-    "through2": "^0.6.5",
-    "vinyl": "^0.5.1"
-  },
-  "devDependencies": {
-    "gulp": "^3.9.0",
-    "gulp-config": "^0.3.0",
-    "gulp-jscs": "^2.0.0",
-    "gulp-jshint": "^1.11.2",
-    "jshint-stylish": "^2.0.1",
-    "mocha": "*"
-  }
+    "name": "gulp-i18n-csv",
+    "version": "1.0.1",
+    "description": "Create internationalized files from a CSV translations file",
+    "license": "MIT",
+    "repository": "fgpv-vpgf/gulp-i18n-csv",
+    "author": {
+        "name": "Cynthia (Qingwei) Li",
+        "email": "Qingwei.Li@ec.gc.ca"
+    },
+    "engines": {
+        "node": ">=0.10.0"
+    },
+    "scripts": {
+        "test": "mocha"
+    },
+    "files": [
+        "index.js",
+        "sample"
+    ],
+    "keywords": [
+        "gulpplugin",
+        "grunt",
+        "i18n",
+        "csv",
+        "translation"
+    ],
+    "dependencies": {
+        "csv": "^0.4.6",
+        "csv-parse": "^1.0.0",
+        "gulp-util": "^3.0.4",
+        "through2": "^0.6.5",
+        "vinyl": "^0.5.1"
+    },
+    "devDependencies": {
+        "gulp": "^3.9.0",
+        "gulp-config": "^0.3.0",
+        "gulp-jscs": "^2.0.0",
+        "gulp-jshint": "^1.11.2",
+        "jshint-stylish": "^2.0.1",
+        "mocha": "*"
+    }
 }
