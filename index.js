@@ -43,7 +43,16 @@ module.exports = function(options) {
                 }
 
                 if (node) {
-                    node[subkeyArray[k]] = {};
+                    if (!node[subkeyArray[k]]) {
+                        node[subkeyArray[k]] = {};
+                    } else {
+                        if (typeof node[subkeyArray[k]] === 'object') {
+                            /*jshint multistr: true */
+                            throw 'CSV poor format. Do not assign string value to key' +
+                            ' if there will be more subkeys nested within that key.';
+                        }
+                    }
+
                     node[subkeyArray[k]] = value;
                 }
             }
