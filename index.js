@@ -23,7 +23,6 @@ module.exports = function(options) {
             var file = 'translation.json'; // use the same name for the translation files
             var lang = csvArray[0][i]; // get language from the CSV header row
             var jsonObj = {}; // JSON object to be created
-            var jsfile;
 
             for (var j = 0; j < csvArray.length; j++) {
                 // append to JSON string
@@ -32,10 +31,16 @@ module.exports = function(options) {
                 var value = csvArray[j][i];
                 var k = 0;
                 var node = jsonObj;
+                var csvErr = 'CSV poor format. Do not assign string value to key' +
+                    ' if there will be more subkeys nested within that key.';
 
                 while (node && (k < subkeyArray.length - 1)) {
                     if (!node[subkeyArray[k]]) {
                         node[subkeyArray[k]] = {};
+                    } else {
+                        if (typeof node[subkeyArray[k]] !== 'object') {
+                            throw csvErr;
+                        }
                     }
 
                     node = node[subkeyArray[k]];
@@ -43,12 +48,17 @@ module.exports = function(options) {
                 }
 
                 if (node) {
-                    node[subkeyArray[k]] = {};
-                    node[subkeyArray[k]] = value;
+                    if (!node[subkeyArray[k]]) {
+                        node[subkeyArray[k]] = value;
+                    } else {
+                        if (typeof node[subkeyArray[k]] === 'object') {
+                            throw csvErr;
+                        }
+                    }
                 }
             }
 
-            jsfile = new File({
+            var jsfile = new File({
                 cwd: '/',
                 path: '/' + lang + '/' + file, // put each translation file in a folder
                 contents: new Buffer(stringify(jsonObj)),
