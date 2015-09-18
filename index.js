@@ -19,31 +19,20 @@ module.exports = function(options) {
     function filePath(jsonObj, lang, key) {
         var savePath;
         if (options.resPath) {
-            var opSplit = options.resPath.split(/\/|\.|\-/);
-            var nsInd = opSplit.indexof('__ns__');
-            var lngInd = opSplit.indexof('__lng__');
-            if (nsInd) {
-                if (key) {
-                    opSplit[nsInd] = key;
-                } else {
-                    opSplit[nsInd] = 'translation';
-                }
-
-                opSplit[lngInd] = lang;
-                opSplit[-1] = '.json';
-            }
-
-            savePath = opSplit.join('');
-        } else {
             if (key) {
-                savePath = '/' + lang + '/' + key + '.json';
+                savePath = savePath.replace('__ns__', key);
             } else {
-                savePath = '/' + lang + '/' + 'translation.json';
+                savePath = savePath.replace('__ns__', 'translation');
             }
+        } else {
+            savePath = 'locales/__lng__/__ns__.json';
+            savePath = savePath.replace('__ns__', 'translation');
         }
 
+        savePath = savePath.replace('__lng__', lang);
+
         var jsfile = new File({
-            cwd: '/',
+            cwd: '.',
             path: savePath, // put each translation file in a folder
             contents: new Buffer(stringify(jsonObj)),
         });
@@ -79,7 +68,6 @@ module.exports = function(options) {
 
         if (options.split !== true) {
             files.push(filePath(jsonObj, lang, key));
-            console.log(files);
         }
 
         return files;
