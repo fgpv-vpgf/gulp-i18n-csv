@@ -103,6 +103,60 @@ This about should become
 }
 ```
 
+### Splitting
+
+Allows for splitting top-level keys into separate files depending on the option specified.
+
+Use this to split every top-level key into its own csv file:
+```js
+gulpi18nCsv({ split: true })
+```
+
+Replace with an array to split only keys in array from the main translation file:
+```js
+gulpi18nCsv({ split: ['cal', 'lang', 'tab'] })
+```
+
+Replace with string to only split one key away from the main translation file:
+```js
+gulpi18nCsv({ split: 'tab' })
+```
+
+If resPath is provided when splitting, the key being split will replace ```__ns__``` in the file path.
+
+#### Examples
+
+Say you have the following .csv:
+
+| key          |       string                 |
+|--------------|------------------------|
+| lang     | ru                   |
+| tab.play     | Tab Play                   |
+| tab.blar     | Tab Blar               |
+| help.one     | Help One                   |
+| help.three | Help Two                   |
+| help.four     | Help Three                   |
+
+When the following is specified, will separate into 3 files: __lang.json__, __tab.json__, and __help.json__.  
+```js
+{split: true}
+```
+
+When the following is specified, will separate into 3 files: __translation.json__, __tab.json__, and __help.json__.  
+```js
+{split: [tab, help]}
+```
+When the following is specified, will separate into 2 files: __lang.json__ and __translation.json__.
+```js
+{split: lang}
+```
+
+
+##### If resPath provided as well
+```js
+{ resPath: 'locales/__lng__/__ns__.json', split: true }
+```
+Will separate into 3 files at paths __locales/ru/lang.json__, __locales/ru/tab.json__, __locales/ru/help.json__.
 
 ## License
 
